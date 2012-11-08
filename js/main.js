@@ -34,7 +34,7 @@ function showLinks() {
 	_html += "</dd>";
 	_html += "<dt>URL:</dt>"
 	_html += "<dd>";
-	_html += "html: <pre class='prettyprint linenums'>" + _link + "</pre>";
+	_html += "html: <pre class='prettyprint linenums'>" + htmlEntities(_link) + "</pre>";
 	_html += "</dd>";
 	$("#output").html(_html);
 }
@@ -84,7 +84,6 @@ function GetPaymentRef(entidade, subentidade, id, valor) {
 	_html += "<dd>";
 	_html += accounting.formatNumber(valor, 2, "",",") + "<br/><br/>";
 	_html += "</dd>";
-	console.log(_PaymentRef);
 	$("#output").html(_html);
 	
 }
@@ -104,8 +103,5 @@ function mb(){
 	var _subentidade = jQuery("#_subentidade").val();
 	var _id = jQuery("#_id").val();
 	var _valor = jQuery("#_valor").val();
-	console.log(_entidade,_subentidade,_id,_valor);
 	var ret = GetPaymentRef(_entidade,_subentidade,_id, _valor);
-	console.log(ret);
-	console.log("WTF");
 }

@@ -3,7 +3,7 @@ function generateLink() {
 	_link += "&cmd=_xclick";
 	_link += "&business=" + $("#_email").val();
 	_link += "&currency_code=" + $("#_currency").val();
-	_link += "&amount=" + $("#_amount").val().replace(".", ",");
+	_link += "&amount=" + $("#_amount").val().replace(",", ".");
 	_link += "&item_name=" + escape($("#_desc").val());
 	return _link;
 }

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/main.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+		<script src="js/vendor/jquery.validate.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/vendor/accounting.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+       <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">Gerador de Pagamentos</a>
+                    <div class="nav-collapse">
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <div id="page_body" class="container" style="padding-top: 60px;">
+            <h1>Crie links PayPal de utilização rápida</h1>
+            <p><h4>Use esta página para criar botões e links Paypal para pagamentos!</h4> 
+                Basta inserir os dados de pagamento no formulário abaixo, clicar em "Gerar Links", copiar um dos links respectivos e utiliza-lo no seu blog, email ou website.
+                Quando os utilizadores clicarem no link, serão redireccionados a uma página de pagamento do PayPal para poderem efectuar o pagamento do valor de forma segura.</p>
+            
+			<div class="row">
+				<div class="span6"><form class="form-horizontal" onsubmit="showLinks();return false;">
+                <fieldset>
+                    <legend>Detalhes do Pagamento PayPal</legend>
+                    <div class="control-group">
+                        <label class="control-label" for="_email">Conta de Paypal</label>
+                        <div class="controls">
+
+                            <input type="email" id="_email" name="pEmail" required="true" title="please fill in your paypal email"/>
+                            <p class="help-block">O seu email de paypal. </p>
+                        </div>
+
+                        <br/>
+                        <label class="control-label" for="_desc">Descrição</label>
+                        <div class="controls">
+                            <input type="text" name="pDesc" id="_desc" required="true" title="please fill in a description for the payment"/>
+                            <p class="help-block">Coloque aqui uma descrição que contenha o número de encomenda. </p>
+                        </div>
+
+                        <br/>
+                        <label class="control-label" for="_currency">Moeda</label>
+                        <div class="controls">
+                            <select class="span3" id="_currency" onchange="setCurrency()">
+                                <option value='USD' data-symbol='$'>U.S. Dollar</option>
+								<option selected="selected" value='EUR' data-symbol='€'>Euro</option>
+								<option value='ILS' data-symbol='₪'>Israeli New Sheqel</option>
+								<option value='AUD' data-symbol='$'>Australian Dollar</option>
+								<option value='BRL' data-symbol='R$'>Brazilian Real</option>
+								<option value='CAD' data-symbol='$'>Canadian Dollar</option>
+								<option value='CZK' data-symbol='Kč'>Czech Koruna</option>
+								<option value='DKK' data-symbol='kr'>Danish Krone</option>
+								<option value='HKD' data-symbol='$'>Hong Kong Dollar</option>
+								<option value='HUF' data-symbol='Ft'>Hungarian Forint</option>
+								<option value='JPY' data-symbol='¥'>Japanese Yen</option>
+								<option value='MYR' data-symbol='RM'>Malaysian Ringgit</option>
+								<option value='MXN' data-symbol='$'>Mexican Peso</option>
+								<option value='NOK' data-symbol='kr'>Norwegian Krone</option>
+								<option value='NZD' data-symbol='$'>New Zealand Dollar</option>
+								<option value='PHP' data-symbol='₱'>Philippine Peso</option>
+								<option value='PLN' data-symbol='zł'>Polish Zloty</option>
+								<option value='GBP' data-symbol='£'>Pound Sterling</option>
+								<option value='SGD' data-symbol='$'>Singapore Dollar</option>
+								<option value='SEK' data-symbol='kr'>Swedish Krona</option>
+								<option value='CHF' data-symbol='CHF'>Swiss Franc</option>
+								<option value='TWD' data-symbol='NT$'>Taiwan New Dollar</option>
+								<option value='THB' data-symbol='฿'>Thai Baht</option>
+								<option value='TRY' data-symbol='₤'>Turkish Lira</option>
+                            </select>
+                        </div>
+
+                        <br/>
+                        <label class="control-label" for="_amount">Total</label>
+                        <div class="controls">
+                            <div class="input-prepend">
+                                <span class="add-on" id="currencySymbol">€</span><input type="text" name="pAmount" id="_amount" required="true" title="Valor total da transação"/>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <label class="control-label" for="_link">Texto do Link</label>
+                        <div class="controls">
+
+                            <input type="text" name="pLink" id="_link" value="Pagar com Paypal"/>
+
+                        </div>
+
+                        <br/>
+                        <label class="control-label" for="_finish">&nbsp;</label>
+                        <div class="controls">
+                            <button class="btn btn-large btn-primary" id="_finish">Gerar Links</button>
+
+                        </div>
+                    </div>
+                </fieldset>
+            </form></div>
+				<div class="span6"><form class="form-horizontal" onsubmit="mb();return false;">
+                <fieldset>
+                    <legend>Detalhes do Pagamento MB</legend>
+                    <div class="control-group">
+                     <label class="control-label" for="_entidade">Entidade</label>
+                        <div class="controls">
+                            <input maxlength="5" class="input-small" type="number" min="10000" max="99999" name="pEntidade" id="_entidade" required="true" title="Entidade"/>
+                        </div>                  
+<br/>						
+						<label class="control-label" min="100" max="999" for="_subentidade">Sub-Entidade</label>
+                        <div class="controls">
+                            <input maxlength="3" class="input-mini" type="number" name="pSubEntidade" id="_subentidade" required="true" title="SubEntidade"/>
+                        </div>               
+<br/>						
+						<label class="control-label" for="_id">ID</label>
+                        <div class="controls">
+                            <input type="number" class="input-mini" name="pId" id="_id" required="true" title="ID da Encomenda"/>
+                        </div>
+						<br/>
+						<label class="control-label" for="_valor">Valor</label>
+                        <div class="controls">
+						                            <div class="input-prepend">
+                            <span class="add-on" id="currencySymbol">€</span><input type="text" name="pValor" id="_valor" required="true" placeholder="123,99" title="Valor da transacção"/>
+                                                </div>
+						</div>
+						<br/>
+                        <div class="controls">
+                            <button class="btn btn-large btn-primary" id="_finish">Gerar Referência</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form></div>
+			</div>         
+			<div id="output"></div>
+        </div> <!-- /container -->
+    </body>
+</html>
